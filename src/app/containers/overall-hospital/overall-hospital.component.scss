@@ -1,0 +1,24 @@
+.title {
+  height: auto;
+}
+
+.widgets {
+  display: flex;
+}
+
+.no-drill {
+  width: 60%;
+  height: 100%;
+}
+
+.drill {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  height: 100%;
+  
+  .drill--top,
+  .drill--bottom {
+    height: 50%;
+  }
+}

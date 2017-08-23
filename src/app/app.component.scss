@@ -1,0 +1,48 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard--row {
+  display: flex;
+  height: 50vh;
+}
+
+.overall-hospital,
+.patient-experience,
+.patient-safety,
+.inventory,
+.requests,
+.available-locations {
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+overall-hospital {
+  width: 30vw;
+}
+
+.patient-experience {
+  width: 30vw;
+  background-image: url('/assets/patient-experience.png');
+}
+
+.patient-safety {
+  width: 40vw;
+  background-image: url('/assets/patient-safety.png');
+}
+
+.inventory {
+  width: 60vw;
+  background-image: url('/assets/inventory.png');
+}
+
+.requests {
+  width: 20vw;
+  background-image: url('/assets/requests.png');
+}
+
+.available-locations {
+  width: 20vw;
+  background-image: url('/assets/available-locations.png');
+}

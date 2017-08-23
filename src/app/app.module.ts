@@ -1,31 +1,26 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
-
-import { MaterialModule } from '@angular/material';
-
-// modules
-import { AppRoutingModule } from './app-routing.module';
-import { PerformanceModule } from 'app/performance/performance.module';
 
 // components
 import { AppComponent } from './app.component';
-import { HomeComponent } from 'app/components/home/home.component';
+import { DoughnutWidgetComponent } from './components/doughnut-widget/doughnut-widget.component';
+import { EchartComponent } from './components/echart/echart.component';
 
+// containers
+import { OverallHospitalComponent } from './containers/overall-hospital/overall-hospital.component';
+
+// services
+import { OverallHospitalService } from './containers/overall-hospital/overall-hospital.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    OverallHospitalComponent,
+    DoughnutWidgetComponent,
+    EchartComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpModule,
-    MaterialModule,
-    AppRoutingModule,
-    PerformanceModule
-  ],
-  providers: [],
+  imports: [BrowserModule],
+  providers: [OverallHospitalService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

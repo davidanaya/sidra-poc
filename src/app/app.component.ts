@@ -3,24 +3,20 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   template: `
-    <h1>
-      Welcome to {{title}}!!
-    </h1>
-    <nav>
-      <ul>
-        <li><a href="" [routerLink]="['/home']">Home</a></li>
-        <li><a href="" [routerLink]="['/performance']">Performance</a></li>
-      </ul>
-    </nav>
-
-    <button md-raised-button>
-      Angular Material works!
-      <md-icon>done</md-icon>
-    </button>
-    <router-outlet></router-outlet>
+    <div class="dashboard">
+      <div class="dashboard--row">
+        <overall-hospital></overall-hospital>
+        <div class="patient-experience"></div>
+        <div class="patient-safety"></div>
+      </div>
+      <div class="dashboard--row">
+        <div class="inventory"></div>
+        <div class="requests"></div>
+        <div class="available-locations"></div>
+      </div>
+    </div>
   `,
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'my-angular-cli-seed';
 }
