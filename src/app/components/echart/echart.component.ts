@@ -47,7 +47,7 @@ export class EchartComponent implements OnInit, OnChanges {
     this.myChart.on('click', params => this.clickOnChart.emit(params));
   }
 
-  onResize() {
+  onResize(event: any) {
     if (this.myChart) {
       this.myChart.resize();
     }

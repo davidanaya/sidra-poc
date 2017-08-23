@@ -8,13 +8,6 @@ import {
   SimpleChanges
 } from '@angular/core';
 
-const values = [
-  { value: 535, name: '荆州' },
-  { value: 510, name: '兖州' },
-  { value: 634, name: '益州' },
-  { value: 735, name: '西凉' }
-];
-
 @Component({
   selector: 'doughnut-widget',
   template: `
@@ -77,36 +70,67 @@ export class DoughnutWidgetComponent implements OnInit, OnChanges {
   }
 
   private buildChartOptions() {
+    // const values = [
+    //   { value: 535, name: '荆州' },
+    //   { value: 510, name: '兖州' },
+    //   { value: 634, name: '益州' },
+    //   { value: 735, name: '西凉' }
+    // ];
+
+    // this.chartOptions = {
+    //   series: [
+    //     {
+    //       type: 'pie',
+    //       radius: ['50%', '75%'],
+    //       data: [
+    //         {
+    //           value: null,
+    //           name: values.reduce((a, b) => a + b.value, 0),
+    //           label: {
+    //             normal: {
+    //               position: 'center',
+    //               formatter: '{b}',
+    //               color: '#000',
+    //               fontWeight: 'bold',
+    //               fontSize: 28
+    //             }
+    //           }
+    //         },
+    //         ...values
+    //       ]
+    //     }
+    //   ]
+    // };
+
     this.chartOptions = {
       series: [
         {
           type: 'pie',
           radius: ['25%', '40%'],
-          // avoidLabelOverlap: false,
-          // label: {
-          //   normal: {
-          //     show: true,
-          //     formatter: '{b}\n{c}',
-          //     position: 'outside'
-          //   },
-          //   emphasis: {
-          //     show: true,
-          //     textStyle: {
-          //       fontSize: '20',
-          //       fontWeight: 'bold'
-          //     }
-          //   }
-          // },
-          // labelLine: {
-          //   normal: {
-          //     show: true,
-          //     length: 5
-          //   }
-          // },
+          avoidLabelOverlap: false,
+          label: {
+            normal: {
+              show: true,
+              formatter: '{b}\n{c}',
+              position: 'outside'
+            },
+            emphasis: {
+              show: true,
+              textStyle: {
+                fontSize: '20',
+                fontWeight: 'bold'
+              }
+            }
+          },
+          labelLine: {
+            normal: {
+              show: true,
+              length: 5
+            }
+          },
           data: [
             {
-              // name: this.chartData.reduce((a, b) => a + b.value, 0),
-              name: values.reduce((a, b) => a + b.value, 0),
+              name: this.chartData.reduce((a, b) => a + b.value, 0),
               value: null,
               label: {
                 normal: {
@@ -118,8 +142,7 @@ export class DoughnutWidgetComponent implements OnInit, OnChanges {
                 }
               }
             },
-            // ...this.chartData
-            ...values
+            ...this.chartData
           ]
         }
       ]
