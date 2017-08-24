@@ -39,7 +39,6 @@ export class DoughnutWidgetComponent implements OnInit, OnChanges {
     this.buildBaseSeries();
     this.updateSeriesWithBorder();
     if (this.selected) {
-      console.log('selected', this.selected);
       this.updateDataWithSelected(this.selected.name);
     }
     this.buildChartOptions();
@@ -160,7 +159,7 @@ export class DoughnutWidgetComponent implements OnInit, OnChanges {
     }
   }
 
-  private onClick(event) {
+  onClick(event) {
     if (this.canSelect) {
       // console.log('chart clicked', event);
       this.updateDataWithSelected(event.name);
