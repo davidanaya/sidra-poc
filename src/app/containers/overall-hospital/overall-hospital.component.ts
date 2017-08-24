@@ -10,22 +10,56 @@ import { OverallHospitalService } from './overall-hospital.service';
 @Component({
   selector: 'overall-hospital',
   template: `
-    <div class="widgets">
-      <doughnut-widget class="no-drill"
-        [data]="data"
-        (select)="onSelectOverall($event)">
-      </doughnut-widget>
-      <div class="drill">
-        <doughnut-widget class="drill--top"
-          [data]="overallSelected.byCmg"
-          (select)="onSelectByCmg($event)">
+    <ng-container *ngIf="overallSelected && byCmgSelected; else someWidgets">
+      <div class="all-widgets" >
+        <doughnut-widget
+          class="first"
+          [data]="data"
+          [selected]="overallSelected"
+          (select)="onSelectOverall($event)">
         </doughnut-widget>
-        <doughnut-widget class="drill--bottom"
-          [data]="byCmgSelected.byUnit"
-          [options]="byUnitOptions">
-        </doughnut-widget>
+        <div class="second" *ngIf="overallSelected">
+          <doughnut-widget
+            [data]="overallSelected.byCmg"
+            [selected]="byCmgSelected"
+            (select)="onSelectByCmg($event)">
+          </doughnut-widget>
+          <doughnut-widget *ngIf="byCmgSelected"
+            [data]="byCmgSelected.byUnit"
+            [options]="byUnitOptions">
+          </doughnut-widget>
+        </div>
       </div>
-    </div>
+    </ng-container>
+
+    <ng-template #someWidgets>
+
+      <ng-container *ngIf="overallSelected; else oneWidget">
+        <div class="two-widgets">
+          <doughnut-widget
+            class="first"
+            [data]="data"
+            [selected]="overallSelected"
+            (select)="onSelectOverall($event)">
+          </doughnut-widget>
+          <doughnut-widget
+            class="second"
+            [data]="overallSelected.byCmg"
+            (select)="onSelectByCmg($event)">
+          </doughnut-widget>
+        </div>
+      </ng-container>
+
+      <ng-template #oneWidget>
+        <div class="one-widget">
+          <doughnut-widget
+            [data]="data"
+            (select)="onSelectOverall($event)">
+          </doughnut-widget>
+        </div>
+      </ng-template>
+
+    </ng-template>
   `,
   styleUrls: ['./overall-hospital.component.scss']
 })
@@ -39,7 +73,7 @@ export class OverallHospitalComponent implements OnInit {
     borderColor: '#173347',
     borderWidth: 2,
     canSelect: false
-  }
+  };
 
   subscription: Subscription;
 
@@ -47,14 +81,18 @@ export class OverallHospitalComponent implements OnInit {
 
   ngOnInit() {
     this.ohService.data$
-      .do(data => (this.overallSelected = data[0]))
-      .do(data => this.onSelectOverall(this.overallSelected))
+      // .do(data => (this.overallSelected = data[0]))
+      // .do(data => this.onSelectOverall(this.overallSelected))
       .subscribe(data => (this.data = data));
   }
 
   onSelectOverall(event: any) {
-    this.overallSelected = event;
-    this.onSelectByCmg(this.overallSelected.byCmg[0]);
+    this.overallSelected =
+      this.overallSelected && this.overallSelected.name === event.name
+        ? null
+        : event;
+    this.byCmgSelected = null;
+    // this.onSelectByCmg(this.overallSelected.byCmg[0]);
   }
 
   onSelectByCmg(event: any) {

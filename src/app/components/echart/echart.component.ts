@@ -22,6 +22,7 @@ export class EchartComponent implements OnInit, OnChanges {
   @ViewChild('chartholder') input: ElementRef;
   @Input() options: any;
   @Output() clickOnChart = new EventEmitter<any>();
+  @Output() changedSize = new EventEmitter();
 
   myChart: any;
 
@@ -50,6 +51,7 @@ export class EchartComponent implements OnInit, OnChanges {
   onResize(event: any) {
     if (this.myChart) {
       this.myChart.resize();
+      this.changedSize.emit(this.input.nativeElement.offsetWidth);
     }
   }
 }

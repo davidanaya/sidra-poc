@@ -27,6 +27,7 @@ export class DoughnutWidgetComponent implements OnInit, OnChanges {
 
   @Input() data: any;
   @Input() options: any;
+  @Input() selected: any;
   @Output() select = new EventEmitter<any>();
 
   constructor() {}
@@ -37,7 +38,10 @@ export class DoughnutWidgetComponent implements OnInit, OnChanges {
     this.canSelect = !this.options || this.options.canSelect;
     this.buildBaseSeries();
     this.updateSeriesWithBorder();
-    this.updateDataWithSelected(this.data[0].name);
+    if (this.selected) {
+      console.log('selected', this.selected);
+      this.updateDataWithSelected(this.selected.name);
+    }
     this.buildChartOptions();
   }
 
@@ -101,7 +105,6 @@ export class DoughnutWidgetComponent implements OnInit, OnChanges {
     //     }
     //   ]
     // };
-
     this.chartOptions = {
       series: [
         {
@@ -157,7 +160,7 @@ export class DoughnutWidgetComponent implements OnInit, OnChanges {
     }
   }
 
-  onClick(event) {
+  private onClick(event) {
     if (this.canSelect) {
       // console.log('chart clicked', event);
       this.updateDataWithSelected(event.name);
